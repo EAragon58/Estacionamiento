@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control de Estacionamiento</title>
+  <script>
+    function updateData() {
+      fetch('/getDistance')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('sensor').innerText = data.distance + ' cm';
+        });
+    }
+
+    function activateServo() {
+      fetch('/activateServo');
+    }
+
+    setInterval(updateData, 1000);
+  </script>
+</head>
+<body>
+  <h1>Control de Estacionamiento</h1>
+  <p>Distancia del Sensor: <span id="sensor">Cargando...</span></p>
+  <button onClick="activateServo()">Levantar Servo</button>
+</body>
+</html>
